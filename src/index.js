@@ -1,5 +1,7 @@
 const visualCrossingKey = 'UTGL3EQS224TNQQLB7945JMTV';
 
+import './style.css';
+
 async function getLocationWeather(location, unitGroup) {
   try {
     const response = await fetch(

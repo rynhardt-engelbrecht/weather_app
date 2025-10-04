@@ -1,0 +1,34 @@
+html, body {
+ margin: 0;
+ padding: 0;
+ height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#weather-info-container {
+  padding: 2em;
+
+  background-color: #40444b;
+}
+
+#weather-info-form {
+  display: flex;
+  gap: 0.5em;
+}
+
+#location-input-container {
+  order: 2;
+}
+
+#unit-group-input-container {
+  order: 1;
+}
+
+#search-location-button {
+  order: 3;
+}
