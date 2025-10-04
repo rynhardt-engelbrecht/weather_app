@@ -1,6 +1,21 @@
-const visualCrossingKey = 'UTGL3EQS224TNQQLB7945JMTV';
-
 import './style.css';
+
+const visualCrossingKey = 'UTGL3EQS224TNQQLB7945JMTV';
+const searchLocationButton = document.querySelector('#search-location-button');
+const unitGroupInput = document.querySelector('#unit-group-input');
+
+searchLocationButton.addEventListener('click', handleSearch);
+
+function handleSearch(e) {
+  e.preventDefault();
+  const locationInput = document.querySelector('#location-input');
+
+  const requestedLocation = locationInput.value;
+  // unitGroupInput == checked or not, used to display temperature in degrees Celsius (metric) or Fahrenheit (us)
+  const unitGroup = unitGroupInput.checked ? 'metric' : 'us';
+
+  const weatherData = getLocationWeather(requestedLocation, unitGroup);
+}
 
 async function getLocationWeather(location, unitGroup) {
   try {
