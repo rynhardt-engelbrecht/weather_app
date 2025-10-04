@@ -21,14 +21,32 @@
     <div id="weather-info-display-container">
       <div id="temperature-data-container">
         <div id="main-temp-container">
-          <div class="temp-data-display" id="tempmax-display"></div>
-          <div class="temp-data-display" id="tempcurrent-display"></div>
-          <div class="temp-data-display" id="tempmin-display"></div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Max Temp</span>
+            <div class="temp-data-display" id="tempmax-display"></div>
+          </div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Current Temp</span>
+            <div class="temp-data-display" id="tempcurrent-display"></div>
+          </div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Min Temp</span>
+            <div class="temp-data-display" id="tempmin-display"></div>
+          </div>
         </div>
         <div id="misc-temp-container">
-          <div class="misc-temp-display" id="feelslike-display"></div>
-          <div class="misc-temp-display" id="humidity-display"></div>
-          <div class="misc-temp-display" id="uvindex-display"></div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Feels Like</span>
+            <div class="misc-temp-display" id="feelslike-display"></div>
+          </div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Humidity (%)</span>
+            <div class="misc-temp-display" id="humidity-display"></div>
+          </div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">UV-Index</span>
+            <div class="misc-temp-display" id="uvindex-display"></div>
+          </div>
         </div>
       </div>
       <div id="condition-icon-container">

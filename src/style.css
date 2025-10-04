@@ -14,11 +14,57 @@ body {
   padding: 2em;
 
   background-color: #40444b;
+  color: #ffffff;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
 }
 
 #weather-info-form {
   display: flex;
   gap: 0.5em;
+}
+
+#weather-info-display-container {
+  padding: 0.5em;
+
+  border: 1px solid #fff;
+  border-radius: 0.4em;
+}
+
+#temperature-data-container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.2em;
+}
+
+#main-temp-container,
+#misc-temp-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.2em;
+}
+
+.temp-data-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.temp-data-wrapper * {
+  text-align: center;
+}
+
+.temp-label {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#description-text {
+  text-align: center;
 }
 
 #location-input-container {
