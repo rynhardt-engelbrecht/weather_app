@@ -1,14 +1,33 @@
 import './style.css';
 
-const visualCrossingKey = 'UTGL3EQS224TNQQLB7945JMTV';
 const searchLocationButton = document.querySelector('#search-location-button');
 const unitGroupInput = document.querySelector('#unit-group-input');
 let weatherData = null;
 
-searchLocationButton.addEventListener('click', handleSearch);
+searchLocationButton.addEventListener('click', async (e) => {
+  weatherData = await handleSearch(e);
+
+  updatePage(verifyUnitGroup());
+
+  updateWeatherImage(weatherData.conditions);
+});
+
 unitGroupInput.addEventListener('change', () => {
   updatePage(verifyUnitGroup());
 });
+
+function updateWeatherImage(conditions) {
+  // fetch image matching weather conditions
+  const conditionsElement = document.querySelector('#condition-icon');
+
+  getWeatherImage(conditions)
+    .then(url => {
+      conditionsElement.src = url;
+    })
+    .catch(() => {
+      conditionsElement.src = 'fallback.gif';
+    })
+}
 
 async function handleSearch(e) {
   e.preventDefault();
@@ -18,8 +37,8 @@ async function handleSearch(e) {
   // unitGroupInput == checked or not, used to display temperature in degrees Celsius (metric) or Fahrenheit (us)
   const unitGroup = unitGroupInput.checked ? 'metric' : 'us';
 
-  weatherData = await getLocationWeather(requestedLocation, unitGroup);
-  updatePage(verifyUnitGroup());
+  const weatherData = await getLocationWeather(requestedLocation, unitGroup);
+  return weatherData;
 }
 
 function verifyUnitGroup() {
@@ -65,10 +84,11 @@ function updatePage(unitGroup) {
   }
 }
 
+// send fetch request, store relevant data in object and return
 async function getLocationWeather(location) {
   try {
     const response = await fetch(
-    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=${visualCrossingKey}&contentType=json`
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=UTGL3EQS224TNQQLB7945JMTV&contentType=json`
     );
     const rawWeatherData = await response.json();
     const currentDay = rawWeatherData.days[0];
@@ -80,11 +100,33 @@ async function getLocationWeather(location) {
       feelslike: rawWeatherData.currentConditions.feelslike,
       humidity: rawWeatherData.currentConditions.humidity,
       uvindex: rawWeatherData.currentConditions.uvindex,
-      condition: currentDay.conditions,
+      conditions: currentDay.conditions,
       description: currentDay.description
     };
 
   } catch (error) {
     return error;
   }
+}
+
+function getWeatherImage(weatherCondition) {
+  return new Promise((resolve, reject) => {
+    fetch(`https://api.giphy.com/v1/gifs/translate?api_key=85S1yMpVZP1LmcTu2olC6svArEPFvTs5&s=${weatherCondition}`)
+      .then(response => {
+        if (!response.ok) {
+          reject(`Giphy fetch failed: ${response.status}`);
+          return;
+        }
+
+        return response.json();
+      })
+      .then(data => {
+        const imageUrl = data.data.images.original.url;
+        resolve(imageUrl);
+      })
+      .catch(error => {
+        console.error(error);
+        reject(error);
+      });
+  });
 }
