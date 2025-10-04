@@ -7,15 +7,37 @@
 </head>
 <body>
   <div id="weather-info-container">
-    <form action="#" id="weather-info-form">
-    <div id="location-input-container">
-      <input type="text" name="location-input" id="location-input">
+    <div id="weather-info-form-container">
+      <form action="#" id="weather-info-form">
+        <div id="location-input-container">
+          <input type="text" name="location-input" id="location-input">
+        </div>
+        <div id="unit-group-input-container">
+          <input type="checkbox" name="unit-group-input" id="unit-group-input">
+        </div>
+        <input type="submit" value="Search" id="search-location-button">
+      </form>
     </div>
-    <div id="unit-group-input-container">
-      <input type="checkbox" name="unit-group-input" id="unit-group-input">
+    <div id="weather-info-display-container">
+      <div id="temperature-data-container">
+        <div id="main-temp-container">
+          <div class="temp-data-display" id="tempmax-display"></div>
+          <div class="temp-data-display" id="tempcurrent-display"></div>
+          <div class="temp-data-display" id="tempmin-display"></div>
+        </div>
+        <div id="misc-temp-container">
+          <div class="misc-temp-display" id="feelslike-display"></div>
+          <div class="misc-temp-display" id="humidity-display"></div>
+          <div class="misc-temp-display" id="uvindex-display"></div>
+        </div>
+      </div>
+      <div id="condition-icon-container">
+        <img src="#" alt="" id="condition-icon">
+      </div>
+      <div id="description-container">
+        <div id="description-text"></div>
+      </div>
     </div>
-    <input type="submit" value="Search" id="search-location-button">
-  </form>
   </div>
 </body>
 </html>
