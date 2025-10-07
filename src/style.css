@@ -127,30 +127,45 @@ body {
 }
 
 #condition-icon-container {
+  position: relative;
   display: flex;
   justify-content: center;
-
   padding: 1em;
+  margin: 1em;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90%;
+
+  --bg-image: url('#');
+}
+
+#condition-icon-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-size: 75%;
+  background-position: center;
+
+  opacity: 0; /* start hidden */
+  transition: opacity 0.25s ease; /* smooth fade-in */
+  pointer-events: none; /* allow clicks through it */
+}
+
+#condition-icon-container:hover::before {
+  opacity: 1; /* appear on hover */
+  z-index: 2;
 }
 
 #condition-icon {
   width: max(280px, 40vh);
   height: max(280px, 40vh);
 
-  position: relative;
-  --bg-image: url('#');
+  z-index: 1; /* above ::before */
 }
 
-#condition-icon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center;
-  opacity: 0.2;
-}
 
 #description-text {
   text-align: center;

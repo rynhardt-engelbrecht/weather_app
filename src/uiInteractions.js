@@ -15,7 +15,8 @@ export function showHideLoading() {
 
 export function updateWeatherImage(data) {
   // fetch image matching weather conditions
-  const conditionsImage = document.querySelector('#condition-icon');
+  const image = document.querySelector('#condition-icon');
+  const container = document.querySelector('#condition-icon-container');
 
   const images = require.context('./images', false, /\.png$/);
   const icon = data.icon
@@ -23,15 +24,15 @@ export function updateWeatherImage(data) {
     .slice(0, 2)
     .join('-') + '.png';
 
-  conditionsImage.src = images(`./${icon}`);
+  image.src = images(`./${icon}`);
 
 
   getWeatherImage(data.conditions)
     .then(url => {
-      conditionsImage.style.setProperty('--bg-image', `url(${url})`);
+      container.style.setProperty('--bg-image', `url(${url})`);
     })
     .catch(() => {
-      conditionsImage.style.setProperty('background-image', 'fallback.gif');
+      container.style.setProperty('--bg-image', 'fallback.gif');
     });
 }
 
