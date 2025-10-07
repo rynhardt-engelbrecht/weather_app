@@ -1,20 +1,41 @@
 import './style.css';
+import loadingGif from './images/200.gif';
 
 const searchLocationButton = document.querySelector('#search-location-button');
 const unitGroupInput = document.querySelector('#unit-group-input');
 let weatherData = null;
 
-searchLocationButton.addEventListener('click', async (e) => {
-  weatherData = await handleSearch(e);
+searchLocationButton.addEventListener('click', (e) => {
+  showHideLoading();
 
-  updatePage(verifyUnitGroup());
+  handleSearch(e)
+    .then(() => {
+      console.log(weatherData);
+      updatePage(verifyUnitGroup());
 
-  updateWeatherImage(weatherData.conditions);
+      return `${weatherData.conditions.replace(/ /g, '-')}-weather`
+    })
+    .then(updateWeatherImage)
+    .then(showHideLoading);
 });
 
 unitGroupInput.addEventListener('change', () => {
   updatePage(verifyUnitGroup());
 });
+
+function showHideLoading() {
+  const loadingIcon = document.querySelector('#loading-icon');
+  // loadingIcon.src = loadingGif;
+
+  const computedStyle = window.getComputedStyle(loadingIcon);
+  const loadingIconDisplay = computedStyle.display;
+
+  if (loadingIconDisplay === 'block') {
+    loadingIcon.style.setProperty('display', 'none');
+  } else {
+    loadingIcon.style.setProperty('display', 'block');
+  }
+}
 
 function updateWeatherImage(conditions) {
   // fetch image matching weather conditions
@@ -22,10 +43,10 @@ function updateWeatherImage(conditions) {
 
   getWeatherImage(conditions)
     .then(url => {
-      conditionsElement.src = url;
+      conditionsElement.style.setProperty('--bg-image', `url(${url})`);
     })
     .catch(() => {
-      conditionsElement.src = 'fallback.gif';
+      conditionsElement.style.setProperty('background-image', 'fallback.gif');
     })
 }
 
@@ -37,8 +58,8 @@ async function handleSearch(e) {
   // unitGroupInput == checked or not, used to display temperature in degrees Celsius (metric) or Fahrenheit (us)
   const unitGroup = unitGroupInput.checked ? 'metric' : 'us';
 
-  const weatherData = await getLocationWeather(requestedLocation, unitGroup);
-  return weatherData;
+  // update global weatherData variable
+  weatherData = await getLocationWeather(requestedLocation, unitGroup);
 }
 
 function verifyUnitGroup() {
