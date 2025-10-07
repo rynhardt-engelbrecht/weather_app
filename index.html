@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+<script defer src="main.js"></script></head>
+<body>
+  <div id="weather-info-container">
+    <div id="weather-info-form-container">
+      <form action="#" id="weather-info-form">
+        <div id="location-input-container">
+          <input type="text" name="location-input" id="location-input" placeholder="Enter Location">
+        </div>
+        <div id="unit-group-input-container">
+          <input type="checkbox" name="unit-group-input" id="unit-group-input">
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+            <span class="toggle-label celsius">°C</span>
+            <span class="toggle-label fahrenheit">°F</span>
+          </span>
+        </div>
+        <input type="submit" value="Search" id="search-location-button">
+      </form>
+    </div>
+    <div id="weather-info-display-container">
+      <div id="temperature-data-container">
+        <div id="main-temp-container">
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Max Temp</span>
+            <div class="temp-data-display" id="tempmax-display"></div>
+          </div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Current Temp</span>
+            <div class="temp-data-display" id="tempcurrent-display"></div>
+          </div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Min Temp</span>
+            <div class="temp-data-display" id="tempmin-display"></div>
+          </div>
+        </div>
+        <div id="misc-temp-container">
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Feels Like</span>
+            <div class="misc-temp-display" id="feelslike-display"></div>
+          </div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">Humidity (%)</span>
+            <div class="misc-temp-display" id="humidity-display"></div>
+          </div>
+          <div class="temp-data-wrapper">
+            <span class="temp-label">UV-Index</span>
+            <div class="misc-temp-display" id="uvindex-display"></div>
+          </div>
+        </div>
+      </div>
+      <div id="condition-icon-container">
+        <img src="#" alt="" id="condition-icon">
+        <div id="loading-icon"></div>
+      </div>
+      <div id="description-container">
+        <div id="description-text"></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+  Icons made by <a href="https://www.freepik.com" target="_blank">Freepik</a> from <a href="https://www.flaticon.com/" target="_blank">www.flaticon.com</a>
+  </footer>
+</body>
+</html>
