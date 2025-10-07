@@ -128,8 +128,10 @@ body {
 
 #condition-icon-container {
   position: relative;
+
   display: flex;
   justify-content: center;
+
   padding: 1em;
   margin: 1em;
 
@@ -142,11 +144,15 @@ body {
 
 #condition-icon-container::before {
   content: "";
+
   position: absolute;
   inset: 0;
+
+  border-radius: 0.4em;
+
   background-image: var(--bg-image);
   background-repeat: no-repeat;
-  background-size: 75%;
+  background-size: cover;
   background-position: center;
 
   opacity: 0; /* start hidden */
