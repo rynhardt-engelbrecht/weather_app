@@ -13,10 +13,26 @@ html, body {
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
+  padding: 1em;
+  gap: 1em;
+
   background-color: var(--primary-bg);
+}
+
+footer {
+  padding: 0.5em;
+
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--text);
+}
+
+footer a {
+  color: inherit;
+  font-style: italic;
 }
 
 #loading-icon {
@@ -152,7 +168,7 @@ body {
 
   background-image: var(--bg-image);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
 
   opacity: 0; /* start hidden */
@@ -172,6 +188,10 @@ body {
   z-index: 1; /* above ::before */
 }
 
+#description-container {
+  display: flex;
+  justify-content: center;
+}
 
 #description-text {
   text-align: center;
