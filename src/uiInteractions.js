@@ -13,17 +13,26 @@ export function showHideLoading() {
   }
 }
 
-export function updateWeatherImage(conditions) {
+export function updateWeatherImage(data) {
   // fetch image matching weather conditions
-  const conditionsElement = document.querySelector('#condition-icon');
+  const conditionsImage = document.querySelector('#condition-icon');
 
-  getWeatherImage(conditions)
+  const images = require.context('./images', false, /\.png$/);
+  const icon = data.icon
+    .split('-')
+    .slice(0, 2)
+    .join('-') + '.png';
+
+  conditionsImage.src = images(`./${icon}`);
+
+
+  getWeatherImage(data.conditions)
     .then(url => {
-      conditionsElement.style.setProperty('--bg-image', `url(${url})`);
+      conditionsImage.style.setProperty('--bg-image', `url(${url})`);
     })
     .catch(() => {
-      conditionsElement.style.setProperty('background-image', 'fallback.gif');
-    })
+      conditionsImage.style.setProperty('background-image', 'fallback.gif');
+    });
 }
 
 export async function handleSearch(location) {

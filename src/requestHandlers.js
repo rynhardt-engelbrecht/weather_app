@@ -15,7 +15,8 @@ export async function getLocationWeather(location) {
       humidity: rawWeatherData.currentConditions.humidity,
       uvindex: rawWeatherData.currentConditions.uvindex,
       conditions: currentDay.conditions,
-      description: currentDay.description
+      description: currentDay.description,
+      icon: currentDay.icon
     };
 
   } catch (error) {

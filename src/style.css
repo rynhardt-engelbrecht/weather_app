@@ -154,6 +154,9 @@ body {
 
 #description-text {
   text-align: center;
+  text-wrap: wrap;
+
+  max-width: 390px;
 }
 
 #location-input-container {
