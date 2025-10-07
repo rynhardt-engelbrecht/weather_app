@@ -4,10 +4,19 @@ html, body {
  height: 100%;
 }
 
+:root {
+  --primary-bg: #2d3035;
+  --secondary-bg: #212327;
+  --primary-shadow: #17181b;
+  --text: #f3f3f5;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: var(--primary-bg);
 }
 
 #loading-icon {
@@ -21,7 +30,7 @@ body {
 
   border-radius: 0.4em;
 
-  background-color: #40444b;
+  background-color: inherit;
   background-image: url('images/200.gif');
   background-repeat: no-repeat;
   background-position: center;
@@ -33,14 +42,18 @@ body {
 #weather-info-container {
   padding: 2em;
 
-  background-color: #40444b;
-  color: #ffffff;
+  background-color: var(--secondary-bg);
+  color: var(--text);
 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   display: flex;
   flex-direction: column;
   gap: 2em;
+
+  border-radius: 0.4em;
+
+  box-shadow: 5px 5px 10px var(--primary-shadow);
 }
 
 #weather-info-form-container {
@@ -50,16 +63,18 @@ body {
 
 #weather-info-form {
   display: flex;
+  align-items: center;
   gap: 0.5em;
 }
 
 #weather-info-display-container {
+  display: none;
+
   position: relative;
   flex-grow: 0;
 
   padding: 0.5em;
 
-  border: 1px solid #fff;
   border-radius: 0.4em;
 }
 
@@ -81,7 +96,25 @@ body {
   display: flex;
   flex-direction: column;
 
+  min-width: 128px;
+  min-height: 40px;
+
+  /* border: 1px solid white; */
+
   gap: 0.2em;
+
+  box-shadow: 2px 2px 4px var(--primary-shadow);
+
+  transition: transform 0.2s ease;
+  transform-origin: center;
+
+  overflow: hidden;
+}
+
+.temp-data-wrapper:hover {
+  transform: scale(1.1);
+
+  cursor: pointer;
 }
 
 .temp-data-wrapper * {
@@ -127,10 +160,93 @@ body {
   order: 2;
 }
 
+#location-input {
+  /* min-height: 30px; */
+
+  font-size: 1.8cqi;
+  padding: 0.2em;
+}
+
 #unit-group-input-container {
   order: 1;
 }
 
 #search-location-button {
   order: 3;
+
+  min-width: 74px;
+  min-height: 28px;
+
+  transition: transform 0.2s ease;
+  transform-origin: center;
+
+  padding: 0.2em;
+
+  font-weight: bold;
+  color: var(--text);
+
+  background-color: var(--primary-bg);
+  border: none;
+  box-shadow: 2px 2px 4px var(--primary-shadow);
 }
+
+#search-location-button:hover {
+  transform: scale(1.2);
+
+  cursor: pointer;
+}
+
+/* temperature unit group toggle */
+#unit-group-input {
+  display: none; /* hide the default checkbox */
+}
+
+.toggle-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: #ccc;
+  border-radius: 15px;
+  padding: 0 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.25s ease;
+}
+
+/* Move the thumb when checked */
+#unit-group-input-container input:checked + .toggle-track .toggle-thumb {
+  transform: translateX(30px); /* width of track minus thumb */
+}
+
+/* Labels styling */
+.toggle-label {
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none; /* don’t interfere with click */
+
+  color: var(--secondary-bg);
+}
+
+.toggle-label.celsius {
+  order: 2;
+}
+
+#unit-group-input-container input:checked + .toggle-track .toggle-label.fahrenheit,
+#unit-group-input-container input:not(:checked) + .toggle-track .toggle-label.celsius {
+  color: #888; /* active */
+}
+
+
