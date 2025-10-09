@@ -19,8 +19,16 @@ export function updateWeatherImage(data) {
   const container = document.querySelector('#condition-icon-container');
 
   const images = require.context('./images', false, /\.png$/);
+  const validTerms = [
+    'clear',
+    'cloudy',
+    'partly',
+    'rain'
+  ];
+
   const icon = data.icon
     .split('-')
+    .filter(string => validTerms.includes(string))
     .slice(0, 2)
     .join('-') + '.png';
 
