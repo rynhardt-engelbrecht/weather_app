@@ -24,7 +24,10 @@ searchLocationButton.addEventListener('click', (event) => {
       return data;
     })
     .then(updateWeatherImage)
-    .then(showHideLoading);
+    .catch((error) => {
+      alert(`Error fetching weather data: ${error}`);
+    })
+    .finally(showHideLoading);
 });
 
 unitGroupInputContainer.addEventListener('click', () => {

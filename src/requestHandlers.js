@@ -4,6 +4,12 @@ export async function getLocationWeather(location) {
     const response = await fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=UTGL3EQS224TNQQLB7945JMTV&contentType=json`
     );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`HTTP Error! Status: ${response.status}, Details: ${JSON.stringify(errorData)}`)
+    }
+
     const rawWeatherData = await response.json();
     const currentDay = rawWeatherData.days[0];
 
@@ -20,7 +26,8 @@ export async function getLocationWeather(location) {
     };
 
   } catch (error) {
-    return error;
+    console.error("Error fetching data:", error);
+    throw error;
   }
 }
 
